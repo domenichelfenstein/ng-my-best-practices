@@ -1,7 +1,8 @@
 import { bootstrapApplication } from "@angular/platform-browser";
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideRouter, RouterOutlet, Routes } from "@angular/router";
-import { startRoute } from "./views/start.routes";
+import { mainRoute } from "./pages/main.route";
+import { loginRoute } from "./pages/login.route";
 
 @Component({
     standalone: true,
@@ -20,8 +21,9 @@ class AppRoot {
 }
 
 const routes: Routes = [
-    startRoute,
-    {path: "", redirectTo: "start", pathMatch: "full"}
+    mainRoute,
+    loginRoute,
+    {path: "", redirectTo: "main", pathMatch: "full"}
 ];
 
 bootstrapApplication(

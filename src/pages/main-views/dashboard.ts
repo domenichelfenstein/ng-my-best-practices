@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
 
 @Component({
     standalone: true,
-    selector: `_start-view`,
-    template: `Start`,
+    selector: `_dashboard`,
+    template: `Dashboard`,
     changeDetection: ChangeDetectionStrategy.OnPush,
 
 })
-export class StartView {
+export class DashboardView {
 }
