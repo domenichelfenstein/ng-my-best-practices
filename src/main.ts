@@ -1,7 +1,33 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { bootstrapApplication } from "@angular/platform-browser";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { provideRouter, RouterOutlet, Routes } from "@angular/router";
+import { startRoute } from "./views/start.routes";
 
-import { AppModule } from './app/app.module';
+@Component({
+    standalone: true,
+    selector: 'app-root',
+    template: `
+        <router-outlet></router-outlet>
+        <style>
+        </style>
+    `,
+    imports: [
+        RouterOutlet
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
+})
+class AppRoot {
+}
 
+const routes: Routes = [
+    startRoute,
+    {path: "", redirectTo: "start", pathMatch: "full"}
+];
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-   .catch(err => console.error(err));
+bootstrapApplication(
+    AppRoot,
+    {
+        providers: [
+            provideRouter(routes)
+        ]
+    }).catch(console.error);
