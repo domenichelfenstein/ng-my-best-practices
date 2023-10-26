@@ -1,0 +1,66 @@
+@import "../colors";
+
+:host {
+  background: $background;
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    height: 20rem;
+    width: 30rem;
+    background: $background2;
+    border-radius: 2rem;
+    padding: 2rem;
+
+    h1 {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+      padding-top: 1rem;
+
+      label {
+        color: $text;
+        font-size: .8rem;
+      }
+
+      input {
+        padding: .5rem;
+        border-radius: .5rem;
+        border: 1px solid $border;
+
+        &::placeholder {
+          color: $text6;
+        }
+
+        &:focus {
+          outline: 1px solid $border2;
+        }
+      }
+    }
+
+    button {
+      border: none;
+      border-radius: .5rem;
+      background: $success1;
+      color: white;
+      margin-top: 1rem;
+      padding: .75rem;
+      width: 100%;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition-duration: 1s;
+
+      &:hover, &:focus {
+        background: $success2;
+        outline: none;
+      }
+    }
+  }
+}

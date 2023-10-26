@@ -1,0 +1,21 @@
+@import "colors";
+
+@font-face {
+  font-family: 'Assistant';
+  src: url('assets/fonts/assistant-variable.ttf') format('truetype');
+}
+
+:host {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Assistant', sans-serif;
+
+  ::ng-deep {
+    color: $text;
+    h1 {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

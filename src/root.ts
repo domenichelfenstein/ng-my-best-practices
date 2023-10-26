@@ -9,9 +9,8 @@ import { loginRoute } from "./pages/login.route";
     selector: 'app-root',
     template: `
         <router-outlet></router-outlet>
-        <style>
-        </style>
     `,
+    styleUrls: ['./root.scss'],
     imports: [
         RouterOutlet
     ],
