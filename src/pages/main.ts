@@ -8,9 +8,9 @@ import { NgOptimizedImage } from "@angular/common";
     template: `
         <nav>
             <div class="title"></div>
-            <a [routerLink]="['dashboard']" routerLinkActive="active">
-                <img ngSrc="../assets/icons/chess-knight.svg" height="28" alt="chess-knight" width="21"/>
-                <span>Dashboard</span>
+            <a [routerLink]="['appointment']" routerLinkActive="active">
+                <img ngSrc="../assets/icons/stetoscope.svg" height="28" alt="stetoscrope" width="28"/>
+                <span>Appointment</span>
             </a>
             <a [routerLink]="['users']" routerLinkActive="active">
                 <img ngSrc="../assets/icons/users.svg" height="28" alt="users" width="35" priority=""/>

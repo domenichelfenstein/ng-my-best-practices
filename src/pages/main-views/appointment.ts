@@ -35,7 +35,7 @@ class JoinPipe implements PipeTransform {
 
 @Component({
    standalone: true,
-   selector: `_dashboard`,
+   selector: `_appointment`,
    template: `
       <h1>Current Appointment</h1>
       <div class="dashboard">
@@ -103,7 +103,7 @@ class JoinPipe implements PipeTransform {
          <section class="test-reports"></section>
          <section class="prescriptions"></section>
       </div>`,
-   styleUrls: ['./dashboard.scss'],
+   styleUrls: ['./appointment.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush,
    imports: [
       MeterPipe,
@@ -114,7 +114,7 @@ class JoinPipe implements PipeTransform {
       UserInfoService
    ]
 })
-export class DashboardView {
+export class AppointmentView {
    userInfo: Signal<null | UserInfo>;
    patientInfo: Signal<null | PatientInfo>;
    vitalSigns: Signal<null | VitalSigns>;
