@@ -8,7 +8,7 @@ export class AuthService {
     ) {
     }
 
-    public isLoggedIn = signal(true);
+    public isLoggedIn = signal(false);
 
     public login() {
         this.isLoggedIn.set(true);

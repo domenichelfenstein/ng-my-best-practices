@@ -1,0 +1,23 @@
+@import "colors";
+
+@mixin button($bg1, $fg, $bg2) {
+   border: none;
+   border-radius: .5rem;
+   background: $bg1;
+   color: $fg;
+   margin-top: 1rem;
+   padding: .75rem;
+   font-size: 1rem;
+   font-weight: bold;
+   cursor: pointer;
+   transition-duration: 1s;
+
+   &:hover, &:focus {
+      background: $bg2;
+      outline: none;
+   }
+}
+
+@mixin success_button() {
+   @include button($success1, $theme5, $success2);
+}
