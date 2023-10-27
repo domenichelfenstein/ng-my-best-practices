@@ -3,12 +3,38 @@
       "{ \"username\": \"test\", \"password\": \"test\" }": [
          200,
          {
-            "token": "test"
+            "userId": "208898786"
          }
       ],
       "default": [
          407,
          "Invalid username or password"
+      ]
+   },
+   "users": {
+      "208898786": [
+         200,
+         {
+            "name": "Roger Curtis",
+            "age": 36,
+            "image": "https://cdn.discordapp.com/attachments/1126227639049396365/1167400605967454248/dome_h_portrait_of_male__tanned__bald__35_years_old__white__t-s_f4c0fe26-dfd4-4b55-bcb0-689bc17022ae.png?ex=654dfd89&is=653b8889&hm=46044beff34f2b743b73b54bb132f2181f9d0f697d712e9dbb233b8bffac5c9d&"
+         }
+      ]
+   },
+   "information": {
+      "208898786": [
+         200,
+         {
+            "gender": "Male",
+            "bloodType": "O+ (Positive)",
+            "allergies": [
+               "Peanuts",
+               "Shellfish"
+            ],
+            "height": 178,
+            "weight": 78,
+            "lastVisit": "2019-10-25"
+         }
       ]
    }
 }

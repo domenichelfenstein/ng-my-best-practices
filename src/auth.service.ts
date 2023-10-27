@@ -10,14 +10,19 @@ export class AuthService extends SignalService {
       fetchService: FetchService
    ) {
       super(fetchService);
+
+      this.isLoggedIn.set(true);
+      this.userId.set("208898786");
    }
 
    public isLoggedIn = signal(false);
+   public userId = signal<string | undefined>(undefined);
 
    public async login(username: string, password: string) {
       try {
-         await this.fetchService.post("login", { username, password });
+         const result = await this.fetchService.post<any, { userId: string }>("login", { username, password });
          this.isLoggedIn.set(true);
+         this.userId.set(result.userId);
          return true;
       } catch (error) {
          console.warn("Login", error);

@@ -24,7 +24,11 @@ export class FetchService {
          headers: this.getHeaders(),
       });
       const json = await response.json();
-      return this.navigate(json, path) as T;
+      const [ responseCode, responseBody ] = this.navigate(json, path);
+      if (responseCode >= 400) {
+         throw new Error(responseBody);
+      }
+      return responseBody as T;
    }
 
    private navigate(jsonObject: any, path: string): any {
