@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "../auth.service";
 import { FormsModule } from "@angular/forms";
+import { FetchService } from "../common/fetch.service";
 
 @Component({
     standalone: true,
@@ -36,7 +37,10 @@ export class LoginPage {
     }
 
     async onLoginClick() {
-        this.authService.login();
-        await this.router.navigate(["/"]);
+        const success = await this.authService.login(this.username, this.password);
+
+        if(success) {
+           await this.router.navigate(["/"]);
+        }
     }
 }

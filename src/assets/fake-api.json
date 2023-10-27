@@ -1,0 +1,14 @@
+{
+   "login": {
+      "{ \"username\": \"test\", \"password\": \"test\" }": [
+         200,
+         {
+            "token": "test"
+         }
+      ],
+      "default": [
+         407,
+         "Invalid username or password"
+      ]
+   }
+}
