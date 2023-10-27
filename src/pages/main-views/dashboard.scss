@@ -1,0 +1,57 @@
+@import "../../colors";
+
+:host {
+   flex: 1 1 auto;
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
+   padding: 0 2rem;
+
+   .dashboard {
+      flex: 1 1 auto;
+      display: grid;
+      gap: 2rem;
+
+      grid-template-columns: 1.25fr 1fr 1fr 1fr;
+      grid-template-rows: 1.5fr 1fr .25fr 2.5fr;
+      grid-template-areas:
+      "portrait heart-rate body-temperature glucose"
+      "portrait test-reports test-reports test-reports"
+      "information test-reports test-reports test-reports"
+      "information prescriptions prescriptions prescriptions";
+
+      section {
+         padding: 1rem;
+         border-radius: 0.5rem;
+         background: $background2;
+
+         &.portrait {
+            grid-area: portrait;
+         }
+
+         &.heart-rate {
+            grid-area: heart-rate;
+         }
+
+         &.body-temperature {
+            grid-area: body-temperature;
+         }
+
+         &.glucose {
+            grid-area: glucose;
+         }
+
+         &.test-reports {
+            grid-area: test-reports;
+         }
+
+         &.information {
+            grid-area: information;
+         }
+
+         &.prescriptions {
+            grid-area: prescriptions;
+         }
+      }
+   }
+}
