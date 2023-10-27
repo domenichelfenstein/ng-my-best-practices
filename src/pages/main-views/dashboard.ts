@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, Pipe, PipeTransform, Signal } from "@angular/core";
-import { PatientInfo, UserInfo, UserInfoService } from "./userInfo.service";
+import { PatientInfo, UserInfo, UserInfoService, VitalSigns } from "./userInfo.service";
 import { AuthService } from "../../auth.service";
 
 
@@ -76,9 +76,30 @@ class JoinPipe implements PipeTransform {
                </tbody>
             </table>
          </section>
-         <section class="heart-rate"></section>
-         <section class="body-temperature"></section>
-         <section class="glucose"></section>
+         <section class="heart-rate vital">
+            <img src="../assets/icons/heart-rate.svg" alt="heart rate" />
+            <h3>Heart Rate</h3>
+            <div>
+               <var>{{ vitalSigns()?.heartRate }}</var>
+               <span>bpm</span>
+            </div>
+         </section>
+         <section class="body-temperature vital">
+            <img src="../assets/icons/termometer.svg" alt="termometer" />
+            <h3>Body Temperature</h3>
+            <div>
+               <var>{{ vitalSigns()?.bodyTemperature }}</var>
+               <span>°C</span>
+            </div>
+         </section>
+         <section class="glucose vital">
+            <img src="../assets/icons/vial.svg" alt="vial" />
+            <h3>Glucose</h3>
+            <div>
+               <var>{{ vitalSigns()?.glucoseLevel }}</var>
+               <span>mg/dl</span>
+            </div>
+         </section>
          <section class="test-reports"></section>
          <section class="prescriptions"></section>
       </div>`,
@@ -96,6 +117,7 @@ class JoinPipe implements PipeTransform {
 export class DashboardView {
    userInfo: Signal<null | UserInfo>;
    patientInfo: Signal<null | PatientInfo>;
+   vitalSigns: Signal<null | VitalSigns>;
 
    constructor(
       userInfoService: UserInfoService,
@@ -116,6 +138,14 @@ export class DashboardView {
          }
 
          return userInfoService.getPatientInfo(userId)();
+      });
+      this.vitalSigns = computed(() => {
+         const userId = authService.userId();
+         if (!userId) {
+            return null;
+         }
+
+         return userInfoService.getVitalSigns(userId)();
       });
    }
 }

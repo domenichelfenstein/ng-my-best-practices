@@ -45,6 +45,7 @@
             h3 {
                margin: 0;
                color: $text4;
+               font-weight: normal;
             }
 
             button {
@@ -52,16 +53,52 @@
             }
          }
 
+         &.vital {
+            text-align: center;
+
+            img {
+               height: 2.5rem;
+               margin-bottom: 1.5rem;
+            }
+
+            h3 {
+               margin: 0;
+               color: $text4;
+            }
+
+            var {
+               font-weight: bold;
+               font-size: 3rem;
+               font-style: normal;
+               padding-right: .25rem;
+            }
+            span {
+               font-weight: bold;
+            }
+         }
+
          &.heart-rate {
             grid-area: heart-rate;
+
+            img {
+               @include recolor($danger, 1);
+            }
          }
 
          &.body-temperature {
             grid-area: body-temperature;
+
+            img {
+               @include recolor($warn, 1);
+            }
          }
 
          &.glucose {
             grid-area: glucose;
+
+            img {
+               @include recolor($danger, 1);
+            }
          }
 
          &.test-reports {
@@ -76,7 +113,7 @@
 
                tr {
                   td {
-                     padding: .25rem;
+                     padding: .5rem;
 
                      &:first-child {
                         font-weight: bold;

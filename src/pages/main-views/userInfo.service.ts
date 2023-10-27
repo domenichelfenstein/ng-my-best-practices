@@ -17,8 +17,14 @@ export class UserInfoService extends SignalService {
    getPatientInfo(id: string) {
       return this.getObject<PatientInfo>(`information/${id}`);
    }
+
+   getVitalSigns(id: string) {
+      return this.getObject<VitalSigns>(`vitalsigns/${id}`);
+   }
 }
 
 export type UserInfo = { id: string, name: string, age: number, image: string };
 
 export type PatientInfo = { gender: string, height: number, weight: number, bloodType: string, allergies: string[], lastVisit: string };
+
+export type VitalSigns = { heartRate: number, bodyTemperature: number, glucoseLevel: number };
