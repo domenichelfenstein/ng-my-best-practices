@@ -1,0 +1,70 @@
+@import "../../../colors";
+
+ul {
+   margin: 0;
+   padding: 0;
+   list-style: none;
+   display: flex;
+   flex-direction: row;
+
+   li {
+      flex: 1 1 33.3%;
+      display: grid;
+      height: 5rem;
+      grid-template-rows: 1.5rem auto;
+      grid-template-columns: 4rem auto;
+      grid-template-areas:
+                     "icon label"
+                     "icon date";
+      column-gap: 1rem;
+      row-gap: .25rem;
+
+      h4 {
+         grid-area: label;
+         display: block;
+         width: 100%;
+         overflow: hidden;
+         text-wrap: none;
+         text-overflow: ellipsis;
+         margin: 0;
+      }
+      small {
+         grid-area: date;
+      }
+      .icon-wrapper {
+         grid-area: icon;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         border-radius: .75rem;
+
+         img {
+            height: 1.5rem;
+         }
+
+         &.normal {
+            background: $info-background;
+
+            img {
+               @include recolor($info, 1);
+            }
+         }
+
+         &.warning {
+            background: $warn-background;
+
+            img {
+               @include recolor($warn, 1);
+            }
+         }
+
+         &.critical {
+            background: $danger-background;
+
+            img {
+               @include recolor($danger, 1);
+            }
+         }
+      }
+   }
+}

@@ -21,243 +21,38 @@
       "information test-reports test-reports test-reports"
       "information prescriptions prescriptions prescriptions";
 
-      section {
+      profile-widget {
+         grid-area: portrait;
+      }
+
+      patient-info-widget {
+         grid-area: information;
+      }
+
+      heart-rate-widget {
+         grid-area: heart-rate;
+      }
+
+      body-temperature-widget {
+         grid-area: body-temperature;
+      }
+
+      glucose-widget {
+         grid-area: glucose;
+      }
+
+      test-reports-widget {
+         grid-area: test-reports;
+      }
+
+      prescriptions-widget {
+         grid-area: prescriptions;
+      }
+
+      > * {
          padding: 2rem;
          border-radius: 0.5rem;
          background: $background2;
-
-         &.portrait {
-            grid-area: portrait;
-
-            text-align: center;
-
-            img {
-               height: 10rem;
-               width: 10rem;
-               border-radius: 1rem;
-            }
-
-            h2 {
-               margin-top: 1rem;
-               margin-bottom: 0;
-            }
-
-            h3 {
-               margin: 0;
-               color: $text4;
-               font-weight: normal;
-            }
-
-            button {
-               @include success_button();
-            }
-         }
-
-         &.vital {
-            text-align: center;
-
-            img {
-               height: 2.5rem;
-               margin-bottom: 1.5rem;
-            }
-
-            h3 {
-               margin: 0;
-               color: $text4;
-            }
-
-            var {
-               font-weight: bold;
-               font-size: 3rem;
-               font-style: normal;
-               padding-right: .25rem;
-            }
-            span {
-               font-weight: bold;
-            }
-         }
-
-         &.heart-rate {
-            grid-area: heart-rate;
-
-            img {
-               @include recolor($danger, 1);
-            }
-         }
-
-         &.body-temperature {
-            grid-area: body-temperature;
-
-            img {
-               @include recolor($warn, 1);
-            }
-         }
-
-         &.glucose {
-            grid-area: glucose;
-
-            img {
-               @include recolor($danger, 1);
-            }
-         }
-
-         &.test-reports {
-            grid-area: test-reports;
-
-            ul {
-               margin: 0;
-               padding: 0;
-               list-style: none;
-               display: flex;
-               flex-direction: row;
-
-               li {
-                  flex: 1 1 33.3%;
-                  display: grid;
-                  height: 5rem;
-                  grid-template-rows: 1.5rem auto;
-                  grid-template-columns: 4rem auto;
-                  grid-template-areas:
-                     "icon label"
-                     "icon date";
-                  column-gap: 1rem;
-                  row-gap: .25rem;
-
-                  h4 {
-                     grid-area: label;
-                     display: block;
-                     width: 100%;
-                     overflow: hidden;
-                     text-wrap: none;
-                     text-overflow: ellipsis;
-                     margin: 0;
-                  }
-                  small {
-                     grid-area: date;
-                  }
-                  .icon-wrapper {
-                     grid-area: icon;
-                     display: flex;
-                     justify-content: center;
-                     align-items: center;
-                     border-radius: .75rem;
-
-                     img {
-                        height: 1.5rem;
-                     }
-
-                     &.normal {
-                        background: $info-background;
-
-                        img {
-                           @include recolor($info, 1);
-                        }
-                     }
-
-                     &.warning {
-                        background: $warn-background;
-
-                        img {
-                           @include recolor($warn, 1);
-                        }
-                     }
-
-                     &.critical {
-                        background: $danger-background;
-
-                        img {
-                           @include recolor($danger, 1);
-                        }
-                     }
-                  }
-               }
-            }
-         }
-
-         &.information {
-            grid-area: information;
-
-            table {
-               width: 100%;
-
-               tr {
-                  td {
-                     padding: .5rem;
-
-                     &:first-child {
-                        font-weight: bold;
-                     }
-                  }
-               }
-            }
-         }
-
-         &.prescriptions {
-            grid-area: prescriptions;
-
-            .drop-zone {
-               width: 100%;
-               height: 5rem;
-               border: 2px dashed $text4;
-               border-radius: 1rem;
-               display: flex;
-               justify-content: center;
-               align-items: center;
-               margin-bottom: 1rem;
-               cursor: grab;
-
-               img {
-                  margin-right: 1rem;
-               }
-            }
-
-            table {
-               width: 100%;
-
-               thead {
-                  tr {
-                     th, td {
-                        color: $text4;
-                        font-weight: bold;
-                        font-size: .9rem;
-                     }
-                  }
-               }
-
-               tbody {
-                  tr {
-                     td {
-                        padding: 1rem 0;
-
-                        &:first-child {
-                           font-weight: bold;
-                        }
-                     }
-
-                     &:not(:last-child) {
-                        td {
-                           border-bottom: 1px solid $border;
-                        }
-                     }
-                  }
-               }
-            }
-
-            .icon-wrapper {
-               padding: .5rem 1rem;
-               border-radius: .5rem;
-               display: inline-block;
-               margin-right: 1rem;
-
-               &.medication {
-                  background: $warn-background;
-
-                  img {
-                     @include recolor($warn, 1);
-                  }
-               }
-            }
-         }
       }
    }
 }
