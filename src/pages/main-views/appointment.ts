@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, Pipe, PipeTransform, Signal } from "@angular/core";
-import { PatientInfo, UserInfo, UserInfoService, VitalSigns } from "./userInfo.service";
-import { AuthService } from "../../auth.service";
+import { ChangeDetectionStrategy, Component, Pipe, PipeTransform, Signal } from "@angular/core";
+import { PatientInfo, PatientService, TestReport, VitalSigns } from "./patient.service";
+import { NgClass, NgForOf } from "@angular/common";
 
 
 @Pipe({
@@ -40,9 +40,9 @@ class JoinPipe implements PipeTransform {
       <h1>Current Appointment</h1>
       <div class="dashboard">
          <section class="portrait">
-            <img [src]="$any(userInfo()?.image)" [alt]="userInfo()?.name"/>
-            <h2>{{userInfo()?.name}}</h2>
-            <h3>Age: {{userInfo()?.age}}</h3>
+            <img [src]="$any(patientInfo()?.image)" [alt]="patientInfo()?.name"/>
+            <h2>{{patientInfo()?.name}}</h2>
+            <h3>Age: {{patientInfo()?.age}}</h3>
             <button type="button">Update</button>
          </section>
          <section class="information">
@@ -77,7 +77,7 @@ class JoinPipe implements PipeTransform {
             </table>
          </section>
          <section class="heart-rate vital">
-            <img src="../assets/icons/heart-rate.svg" alt="heart rate" />
+            <img src="../../assets/icons/heart-rate.svg" alt="heart rate" />
             <h3>Heart Rate</h3>
             <div>
                <var>{{ vitalSigns()?.heartRate }}</var>
@@ -85,7 +85,7 @@ class JoinPipe implements PipeTransform {
             </div>
          </section>
          <section class="body-temperature vital">
-            <img src="../assets/icons/termometer.svg" alt="termometer" />
+            <img src="../../assets/icons/thermometer.svg" alt="thermometer" />
             <h3>Body Temperature</h3>
             <div>
                <var>{{ vitalSigns()?.bodyTemperature }}</var>
@@ -93,14 +93,25 @@ class JoinPipe implements PipeTransform {
             </div>
          </section>
          <section class="glucose vital">
-            <img src="../assets/icons/vial.svg" alt="vial" />
+            <img src="../../assets/icons/vial.svg" alt="vial" />
             <h3>Glucose</h3>
             <div>
                <var>{{ vitalSigns()?.glucoseLevel }}</var>
                <span>mg/dl</span>
             </div>
          </section>
-         <section class="test-reports"></section>
+         <section class="test-reports">
+            <h3>Test Reports</h3>
+            <ul>
+               <li *ngFor="let t of testReports()">
+                  <h4>{{ t.label }}</h4>
+                  <small>{{ t.date | localDate }}</small>
+                  <div class="icon-wrapper" [ngClass]="t.resultType">
+                    <img src="../../assets/icons/notes-medical.svg" alt="{{ t.resultType }}" />
+                  </div>
+               </li>
+            </ul>
+         </section>
          <section class="prescriptions"></section>
       </div>`,
    styleUrls: ['./appointment.scss'],
@@ -108,44 +119,24 @@ class JoinPipe implements PipeTransform {
    imports: [
       MeterPipe,
       LocalDatePipe,
-      JoinPipe
+      JoinPipe,
+      NgForOf,
+      NgClass
    ],
    providers: [
-      UserInfoService
+      PatientService
    ]
 })
 export class AppointmentView {
-   userInfo: Signal<null | UserInfo>;
    patientInfo: Signal<null | PatientInfo>;
    vitalSigns: Signal<null | VitalSigns>;
+   testReports: Signal<null | TestReport[]>;
 
    constructor(
-      userInfoService: UserInfoService,
-      authService: AuthService
+      patientService: PatientService
    ) {
-      this.userInfo = computed(() => {
-         const userId = authService.userId();
-         if (!userId) {
-            return null;
-         }
-
-         return userInfoService.getUserInfo(userId)();
-      });
-      this.patientInfo = computed(() => {
-         const userId = authService.userId();
-         if (!userId) {
-            return null;
-         }
-
-         return userInfoService.getPatientInfo(userId)();
-      });
-      this.vitalSigns = computed(() => {
-         const userId = authService.userId();
-         if (!userId) {
-            return null;
-         }
-
-         return userInfoService.getVitalSigns(userId)();
-      });
+      this.patientInfo = patientService.getContentCurrentUserId(patientService.getPatientInfo);
+      this.vitalSigns = patientService.getContentCurrentUserId(patientService.getVitalSigns);
+      this.testReports = patientService.getContentCurrentUserId(patientService.getTestReports);
    }
 }

@@ -11,20 +11,13 @@
          "Invalid username or password"
       ]
    },
-   "users": {
+   "information": {
       "208898786": [
          200,
          {
             "name": "Roger Curtis",
             "age": 36,
-            "image": "https://cdn.discordapp.com/attachments/1126227639049396365/1167411207259553842/dome_h_portrait_of_male__dark_skin__casual__relaxed__bald__35_y_5ed24be8-d203-4f61-bfc6-85692251125f.png?ex=654e0769&is=653b9269&hm=6f4e8649afb2b71ddc53f19d26a8810f3fd35b268e07fa8cf7a39130a028ffd2&"
-         }
-      ]
-   },
-   "information": {
-      "208898786": [
-         200,
-         {
+            "image": "https://cdn.discordapp.com/attachments/1126227639049396365/1167411207259553842/dome_h_portrait_of_male__dark_skin__casual__relaxed__bald__35_y_5ed24be8-d203-4f61-bfc6-85692251125f.png?ex=654e0769&is=653b9269&hm=6f4e8649afb2b71ddc53f19d26a8810f3fd35b268e07fa8cf7a39130a028ffd2&",
             "gender": "Male",
             "bloodType": "O+ (Positive)",
             "allergies": [
@@ -45,6 +38,28 @@
             "bodyTemperature": 36.5,
             "glucoseLevel": 100
          }
+      ]
+   },
+   "test-reports": {
+      "208898786": [
+         200,
+         [
+            {
+               "date": "2020-02-12",
+               "label": "CT Scan - Full Body",
+               "resultType": "normal"
+            },
+            {
+               "date": "2020-02-12",
+               "label": "Creatine Kinase Test",
+               "resultType": "warning"
+            },
+            {
+               "date": "2020-02-12",
+               "label": "Eye Fluorescein Angiography",
+               "resultType": "critical"
+            }
+         ]
       ]
    }
 }
