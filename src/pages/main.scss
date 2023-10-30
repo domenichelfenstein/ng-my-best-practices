@@ -22,9 +22,10 @@
 
       a {
          cursor: pointer;
-         display: block;
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
          width: 100%;
-         text-align: center;
          margin-bottom: 2.5rem;
          position: relative;
          text-decoration: none;
@@ -36,10 +37,13 @@
          }
 
          span {
-            display: none;
+            display: inline-block;
+            overflow: hidden;
+            width: 0;
+            text-align: left;
             color: $theme2;
             font-size: 1.25rem;
-            transition: all .2s ease-in-out;
+            transition: width 1s ease-in-out;
          }
 
          &:hover {
@@ -56,6 +60,10 @@
          &.active {
             img {
                @include recolor($theme5, 1);
+            }
+
+            span {
+               color: $theme5;
             }
 
             &::before {
@@ -89,7 +97,7 @@
             }
 
             span {
-               display: inline-block;
+               width: 100%;
             }
          }
       }
