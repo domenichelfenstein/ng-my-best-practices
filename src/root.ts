@@ -22,7 +22,7 @@ class AppRoot {
 const routes: Routes = [
    mainRoute,
    loginRoute,
-   { path: "", redirectTo: "main", pathMatch: "full" }
+   { path: "", redirectTo: "main/appointment", pathMatch: "full" }
 ];
 
 bootstrapApplication(

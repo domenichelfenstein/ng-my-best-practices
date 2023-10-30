@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Pipe, PipeTransform, Signal } from "@angular/core";
 import { PatientInfo, PatientService, Prescription, TestReport, VitalSigns } from "./patient.service";
 import { AppCommonModule } from "../../common/common.module";
+import { ActivatedRoute } from "@angular/router";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 @Pipe({
    standalone: true,
@@ -176,11 +178,13 @@ export class AppointmentView {
    prescriptions: Signal<null | Prescription[]>;
 
    constructor(
-      patientService: PatientService
+      patientService: PatientService,
+      activeRoute: ActivatedRoute
    ) {
-      this.patientInfo = patientService.getContentCurrentUserId(patientService.getPatientInfo);
-      this.vitalSigns = patientService.getContentCurrentUserId(patientService.getVitalSigns);
-      this.testReports = patientService.getContentCurrentUserId(patientService.getTestReports);
-      this.prescriptions = patientService.getContentCurrentUserId(patientService.getPrescriptions);
+      const params = toSignal(activeRoute.params);
+      this.patientInfo = patientService.getContentCurrentPatientId(params, patientService.getPatientInfo);
+      this.vitalSigns = patientService.getContentCurrentPatientId(params, patientService.getVitalSigns);
+      this.testReports = patientService.getContentCurrentPatientId(params, patientService.getTestReports);
+      this.prescriptions = patientService.getContentCurrentPatientId(params, patientService.getPrescriptions);
    }
 }

@@ -11,7 +11,7 @@ export class FetchService {
       });
       const json = await response.json();
       const responses = this.navigate(json, path);
-      const [ responseCode, responseBody ] = this.getResponse(responses, value);
+      const [responseCode, responseBody] = this.getResponse(responses, value);
       if (responseCode >= 400) {
          throw new Error(responseBody);
       }
@@ -24,7 +24,7 @@ export class FetchService {
          headers: this.getHeaders(),
       });
       const json = await response.json();
-      const [ responseCode, responseBody ] = this.navigate(json, path);
+      const [responseCode, responseBody] = this.navigate(json, path);
       if (responseCode >= 400) {
          throw new Error(responseBody);
       }
@@ -36,7 +36,7 @@ export class FetchService {
       const remainingPath = path.substring(firstPart.length + 1);
       const nextObject = jsonObject[firstPart];
       if (nextObject == undefined) {
-         return undefined;
+         throw new Error(`Path ${ path } not found`)
       }
       if (remainingPath.length == 0) {
          return nextObject;

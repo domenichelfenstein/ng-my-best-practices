@@ -1,5 +1,5 @@
 import { Route } from "@angular/router";
-import { appointmentRoute } from "./main-views/appointment.routes";
+import { appointmentRoutes } from "./main-views/appointment.routes";
 import { inject } from "@angular/core";
 import { AuthService } from "../auth.service";
 
@@ -9,7 +9,6 @@ export const mainRoute: Route =
         loadComponent: () => import("./main").then(file => file.MainPage),
         canActivate: [() => inject(AuthService).canActivateBecauseItsLoggedIn()],
         children: [
-            appointmentRoute,
-            {path: "", redirectTo: "appointment", pathMatch: "full"}
+           ...appointmentRoutes
         ]
     }

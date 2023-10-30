@@ -12,7 +12,7 @@ export class AuthService extends SignalService {
       super(fetchService);
 
       this.isLoggedIn.set(true);
-      this.userId.set("208898786");
+      this.userId.set("f17cad63-69c6-455a-81e2-ba052a1ea40e");
    }
 
    public isLoggedIn = signal(false);

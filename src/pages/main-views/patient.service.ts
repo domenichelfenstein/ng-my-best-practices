@@ -1,13 +1,12 @@
 import { computed, Injectable, Signal } from "@angular/core";
 import { SignalService } from "../../common/signals.service";
 import { FetchService } from "../../common/fetch.service";
-import { AuthService } from "../../auth.service";
+import { Params } from "@angular/router";
 
 @Injectable()
 export class PatientService extends SignalService {
    constructor(
-      fetchService: FetchService,
-      private authService: AuthService
+      fetchService: FetchService
    ) {
       super(fetchService);
    }
@@ -28,14 +27,15 @@ export class PatientService extends SignalService {
       return this.getObject<Prescription[]>(`prescriptions/${id}`);
    }
 
-   getContentCurrentUserId = <T>(signalFunction: (id: string) => Signal<T>) => {
+   getContentCurrentPatientId = <T>(params: Signal<Params | undefined>, signalFunction: (id: string) => Signal<T>) => {
       return computed(() => {
-         const userId = this.authService.userId();
-         if (!userId) {
+         const paramsContent = params();
+         const patientId = paramsContent ? paramsContent["patientId"] : undefined;
+         if (!patientId) {
             return null;
          }
 
-         return signalFunction(userId)();
+         return signalFunction(patientId)();
       });
    }
 }
