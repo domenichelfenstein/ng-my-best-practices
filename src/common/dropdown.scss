@@ -1,7 +1,8 @@
 @import "../colors";
 
 :host {
-   display: none;
+   display: block;
+   visibility: hidden;
    position: absolute;
    list-style: none;
    padding: 0;
@@ -12,9 +13,12 @@
    border: 1px solid $border;
    background: $theme5;
    border-radius: .3rem;
+   opacity: 0;
+   transition: opacity .5s ease-in;
 
    &.open {
-      display: block;
+      visibility: visible;
+      opacity: 1;
    }
 
    &.right {
