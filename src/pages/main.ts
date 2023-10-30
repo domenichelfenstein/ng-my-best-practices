@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 import { NgOptimizedImage } from "@angular/common";
 import { AuthService } from "../auth.service";
+import { Dropdown } from "../common/dropdown";
 
 @Component({
    standalone: true,
@@ -37,11 +38,11 @@ import { AuthService } from "../auth.service";
       <header>
          <section class="user-info">
             <img [src]="authService.userInfo()?.image" [alt]="authService.userInfo()?.name"/>
-            <a (click)="d.dataset['dropdown'] = d.dataset['dropdown'] == 'open' ? 'closed' : 'open'">
+            <a #toggler>
                <span>{{ authService.userInfo()?.name }}</span>
                <img src="../assets/icons/chevron-down.svg" alt="chevron-down"/>
             </a>
-            <ul class="dropdown" #d data-position="right">
+            <ul [dropdown-on]="toggler" class="right">
                <li><a>Profile</a></li>
                <li><a>Logout</a></li>
             </ul>
@@ -57,6 +58,7 @@ import { AuthService } from "../auth.service";
       RouterLink,
       RouterLinkActive,
       NgOptimizedImage,
+      Dropdown
    ],
    changeDetection: ChangeDetectionStrategy.OnPush
 })

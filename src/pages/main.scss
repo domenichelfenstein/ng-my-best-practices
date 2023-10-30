@@ -135,41 +135,6 @@
             gap: .5rem;
             font-size: .9rem;
          }
-
-         .dropdown {
-            display: none;
-            position: absolute;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            z-index: 99;
-            top: 100%;
-            min-width: 8rem;
-            border: 1px solid $border;
-            background: $theme5;
-            border-radius: .3rem;
-
-            &[data-dropdown="open"] {
-               display: block;
-            }
-
-            &[data-position="right"] {
-               right: 0;
-            }
-
-            li {
-               padding: .5rem 1rem;
-
-               a {
-                  display: block;
-                  width: 100%;
-               }
-
-               &:not(:last-child) {
-                  border-bottom: 1px solid $border;
-               }
-            }
-         }
       }
    }
 
