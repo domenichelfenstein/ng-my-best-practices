@@ -10,19 +10,18 @@ export class AuthService extends SignalService {
       fetchService: FetchService
    ) {
       super(fetchService);
-
       this.isLoggedIn.set(true);
-      this.userId.set("f17cad63-69c6-455a-81e2-ba052a1ea40e");
+      this.login("test", "test");
    }
 
    public isLoggedIn = signal(false);
-   public userId = signal<string | undefined>(undefined);
+   public userInfo = signal<UserInfo | undefined>(undefined);
 
    public async login(username: string, password: string) {
       try {
-         const result = await this.fetchService.post<any, { userId: string }>("login", { username, password });
+         const result = await this.fetchService.post<any, UserInfo>("login", { username, password });
          this.isLoggedIn.set(true);
-         this.userId.set(result.userId);
+         this.userInfo.set(result);
          return true;
       } catch (error) {
          console.warn("Login", error);
@@ -40,3 +39,5 @@ export class AuthService extends SignalService {
       return false;
    }
 }
+
+export type UserInfo = { userId: string; name: string; image: string };

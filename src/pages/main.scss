@@ -4,7 +4,7 @@
    flex: 1 1 auto;
    display: grid;
    grid-template-columns: fit-content(16rem) auto;
-   grid-template-rows: 2rem auto 2rem;
+   grid-template-rows: 4rem auto 2rem;
    grid-template-areas:
   "nav header"
   "nav main"
@@ -17,7 +17,7 @@
       width: 8rem;
 
       .title {
-         height: 3.75rem;
+         height: 4.75rem;
       }
 
       a {
@@ -84,6 +84,7 @@
       }
 
       transition: all .5s ease-in-out;
+
       &:hover {
          width: 16rem;
 
@@ -106,12 +107,76 @@
    header {
       grid-area: header;
       background: $background;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      padding: 1rem 1rem 0;
+
+      .user-info {
+         display: flex;
+         flex-direction: row;
+         align-items: center;
+         gap: .5rem;
+         margin-right: 2rem;
+         position: relative;
+
+         > img {
+            display: inline-block;
+            height: 2rem;
+            width: 2rem;
+            border-radius: 50%;
+         }
+
+         > a {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: .5rem;
+            font-size: .9rem;
+         }
+
+         .dropdown {
+            display: none;
+            position: absolute;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            z-index: 99;
+            top: 100%;
+            min-width: 8rem;
+            border: 1px solid $border;
+            background: $theme5;
+            border-radius: .3rem;
+
+            &[data-dropdown="open"] {
+               display: block;
+            }
+
+            &[data-position="right"] {
+               right: 0;
+            }
+
+            li {
+               padding: .5rem 1rem;
+
+               a {
+                  display: block;
+                  width: 100%;
+               }
+
+               &:not(:last-child) {
+                  border-bottom: 1px solid $border;
+               }
+            }
+         }
+      }
    }
 
    main {
       grid-area: main;
       background: $background;
-      padding: 1rem;
+      padding: 0 1rem;
       display: flex;
       flex-direction: column;
    }
