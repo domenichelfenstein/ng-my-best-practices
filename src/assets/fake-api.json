@@ -61,5 +61,26 @@
             }
          ]
       ]
+   },
+   "prescriptions": {
+      "208898786": [
+         200,
+         [
+            {
+               "date": "2019-10-25",
+               "label": "Heart Diseases Medication",
+               "type": "medication",
+               "durationAmount": 3,
+               "durationUnit": "month"
+            },
+            {
+               "date": "2019-08-08",
+               "label": "Skin Care",
+               "type": "medication",
+               "durationAmount": 2,
+               "durationUnit": "month"
+            }
+         ]
+      ]
    }
 }

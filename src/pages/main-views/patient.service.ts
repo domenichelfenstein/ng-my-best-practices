@@ -24,6 +24,10 @@ export class PatientService extends SignalService {
       return this.getObject<TestReport[]>(`test-reports/${id}`);
    }
 
+   getPrescriptions = (id: string) => {
+      return this.getObject<Prescription[]>(`prescriptions/${id}`);
+   }
+
    getContentCurrentUserId = <T>(signalFunction: (id: string) => Signal<T>) => {
       return computed(() => {
          const userId = this.authService.userId();
@@ -41,5 +45,7 @@ export type PatientInfo = { name: string, age: number, image: string; gender: st
 export type VitalSigns = { heartRate: number, bodyTemperature: number, glucoseLevel: number };
 
 export type ResultType = "normal" | "warning" | "critical";
-
 export type TestReport = { label: string, resultType: ResultType, date: string };
+
+export type PrescriptionType = "medication" | "therapy";
+export type Prescription = { label: string, type: PrescriptionType, date: string; durationAmount: number, durationUnit: string };

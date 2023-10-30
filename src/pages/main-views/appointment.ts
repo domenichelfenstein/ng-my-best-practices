@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Pipe, PipeTransform, Signal } from "@angular/core";
-import { PatientInfo, PatientService, TestReport, VitalSigns } from "./patient.service";
-import { NgClass, NgForOf } from "@angular/common";
-
+import { PatientInfo, PatientService, Prescription, TestReport, VitalSigns } from "./patient.service";
+import { AppCommonModule } from "../../common/common.module";
 
 @Pipe({
    standalone: true,
@@ -19,7 +18,23 @@ class MeterPipe implements PipeTransform {
 })
 class LocalDatePipe implements PipeTransform {
    transform(value: string | undefined) {
-      return value == undefined ? "" : new Date(value).toLocaleDateString("de-DE");
+      return value == undefined ? "" : new Date(value)
+         .toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" });
+   }
+}
+
+@Pipe({
+   standalone: true,
+   name: "duration"
+})
+class DurationPipe implements PipeTransform {
+   transform(value: [number, string] | undefined) {
+      if (value == undefined) {
+         return "";
+      }
+
+      const [amount, unit] = value;
+      return `${ amount } ${ unit }s`;
    }
 }
 
@@ -29,7 +44,7 @@ class LocalDatePipe implements PipeTransform {
 })
 class JoinPipe implements PipeTransform {
    transform(value: string[] | undefined, separator: string) {
-      return value == undefined ? "" : value.join(`${separator} `);
+      return value == undefined ? "" : value.join(`${ separator } `);
    }
 }
 
@@ -77,7 +92,7 @@ class JoinPipe implements PipeTransform {
             </table>
          </section>
          <section class="heart-rate vital">
-            <img src="../../assets/icons/heart-rate.svg" alt="heart rate" />
+            <img src="../../assets/icons/heart-rate.svg" alt="heart rate"/>
             <h3>Heart Rate</h3>
             <div>
                <var>{{ vitalSigns()?.heartRate }}</var>
@@ -85,7 +100,7 @@ class JoinPipe implements PipeTransform {
             </div>
          </section>
          <section class="body-temperature vital">
-            <img src="../../assets/icons/thermometer.svg" alt="thermometer" />
+            <img src="../../assets/icons/thermometer.svg" alt="thermometer"/>
             <h3>Body Temperature</h3>
             <div>
                <var>{{ vitalSigns()?.bodyTemperature }}</var>
@@ -93,7 +108,7 @@ class JoinPipe implements PipeTransform {
             </div>
          </section>
          <section class="glucose vital">
-            <img src="../../assets/icons/vial.svg" alt="vial" />
+            <img src="../../assets/icons/vial.svg" alt="vial"/>
             <h3>Glucose</h3>
             <div>
                <var>{{ vitalSigns()?.glucoseLevel }}</var>
@@ -107,21 +122,48 @@ class JoinPipe implements PipeTransform {
                   <h4>{{ t.label }}</h4>
                   <small>{{ t.date | localDate }}</small>
                   <div class="icon-wrapper" [ngClass]="t.resultType">
-                    <img src="../../assets/icons/notes-medical.svg" alt="{{ t.resultType }}" />
+                     <img src="../../assets/icons/notes-medical.svg" alt="{{ t.resultType }}"/>
                   </div>
                </li>
             </ul>
          </section>
-         <section class="prescriptions"></section>
+         <section class="prescriptions">
+            <h3>Prescriptions</h3>
+            <a class="drop-zone">
+               <img src="../../assets/icons/plus.svg" alt="plus"/>
+               <label>Add a prescription</label>
+            </a>
+            <table>
+               <thead>
+               <tr>
+                  <td>Prescriptions</td>
+                  <td>Date</td>
+                  <td>Duration</td>
+               </tr>
+               </thead>
+               <tbody>
+               <tr *ngFor="let p of prescriptions()">
+                  <td>
+                     <div class="icon-wrapper" [ngClass]="p.type">
+                        <img src="../../assets/icons/notes-medical.svg" alt="{{ p.type }}"/>
+                     </div>
+                     <span>{{ p.label }}</span>
+                  </td>
+                  <td>{{ p.date | localDate }}</td>
+                  <td>{{ [p.durationAmount, p.durationUnit] | duration }}</td>
+               </tr>
+               </tbody>
+            </table>
+         </section>
       </div>`,
    styleUrls: ['./appointment.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush,
    imports: [
       MeterPipe,
       LocalDatePipe,
+      DurationPipe,
       JoinPipe,
-      NgForOf,
-      NgClass
+      AppCommonModule
    ],
    providers: [
       PatientService
@@ -131,6 +173,7 @@ export class AppointmentView {
    patientInfo: Signal<null | PatientInfo>;
    vitalSigns: Signal<null | VitalSigns>;
    testReports: Signal<null | TestReport[]>;
+   prescriptions: Signal<null | Prescription[]>;
 
    constructor(
       patientService: PatientService
@@ -138,5 +181,6 @@ export class AppointmentView {
       this.patientInfo = patientService.getContentCurrentUserId(patientService.getPatientInfo);
       this.vitalSigns = patientService.getContentCurrentUserId(patientService.getVitalSigns);
       this.testReports = patientService.getContentCurrentUserId(patientService.getTestReports);
+      this.prescriptions = patientService.getContentCurrentUserId(patientService.getPrescriptions);
    }
 }
