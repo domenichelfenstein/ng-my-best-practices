@@ -17,7 +17,7 @@ import { AppCommonModule } from "../common/common.module";
             <label>Password</label>
             <input type="password" placeholder="Password" [(ngModel)]="password" name="password">
          </section>
-         <button type="submit">Login</button>
+         <button type="submit" [disabled]="!username || !password">Login</button>
       </form>`,
    styleUrls: ["./login.scss"],
    imports: [

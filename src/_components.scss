@@ -12,6 +12,11 @@
    cursor: pointer;
    transition-duration: 1s;
 
+   &[disabled] {
+      opacity: .5;
+      cursor: not-allowed;
+   }
+
    &:hover, &:focus {
       background: $bg2;
       outline: none;
