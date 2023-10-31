@@ -7,6 +7,11 @@ ul {
    display: flex;
    flex-direction: row;
 
+   @media (max-width: 512px) {
+      flex-direction: column;
+      gap: .5rem;
+   }
+
    li {
       flex: 1 1 33.3%;
       display: grid;

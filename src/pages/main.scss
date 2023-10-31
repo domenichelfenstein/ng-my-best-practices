@@ -177,4 +177,25 @@
          display: flex;
       }
    }
+
+   @media (max-width: 512px) {
+      grid-template-columns: 100%;
+      grid-template-rows: 4rem auto 2rem;
+      grid-template-areas:
+      "header"
+      "main"
+      "footer";
+
+      nav {
+         display: none;
+      }
+
+      header {
+         padding: 1rem;
+
+         .user-info {
+            margin-right: 0;
+         }
+      }
+   }
 }

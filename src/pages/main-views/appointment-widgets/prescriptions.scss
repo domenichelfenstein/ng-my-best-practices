@@ -33,6 +33,13 @@ table {
       tr {
          td {
             padding: 1rem 0;
+            text-wrap: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            @media (max-width: 512px) {
+               max-width: 5rem;
+            }
 
             &:first-child {
                font-weight: bold;
@@ -53,6 +60,10 @@ table {
    border-radius: .5rem;
    display: inline-block;
    margin-right: 1rem;
+
+   @media (max-width: 512px) {
+      display: none;
+   }
 
    &.medication {
       background: $warn-background;

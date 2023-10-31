@@ -22,7 +22,6 @@
       "information prescriptions prescriptions prescriptions";
 
       ::ng-deep {
-
          profile-widget {
             grid-area: portrait;
          }
@@ -55,7 +54,18 @@
             padding: 2rem;
             border-radius: 0.5rem;
             background: $background2;
+            overflow: hidden;
          }
+      }
+   }
+
+   @media (max-width: 512px) {
+      padding: 0 .5rem;
+      gap: .5rem;
+
+      .dashboard {
+         display: flex;
+         flex-direction: column;
       }
    }
 }
