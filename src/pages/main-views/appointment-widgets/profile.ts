@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { PatientInfo } from "../patient.service";
-import { Router } from "@angular/router";
+import { MainPage } from "../../main";
 
 @Component({
    standalone: true,
@@ -18,11 +18,11 @@ export class ProfileWidget {
    @Input("patient-id") patientId: string | null | undefined;
 
    constructor(
-      private router: Router
+      private mainPage: MainPage,
    ) {
    }
 
    async onUpdate() {
-      await this.router.navigate(["", "main", { outlets: { "popup": ["update-profile", this.patientId] } }]);
+      await this.mainPage.openPopup(["update-profile", this.patientId]);
    }
 }
