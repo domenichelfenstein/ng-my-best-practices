@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, signal } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "../auth.service";
 import { AppCommonModule } from "../common/common.module";
@@ -7,7 +7,7 @@ import { AppCommonModule } from "../common/common.module";
    standalone: true,
    selector: "_login-page",
    template: `
-      <form autocomplete="off" (submit)="onLoginClick()">
+      <form autocomplete="off" (submit)="onLoginClick()" [class.shaking]="isShaking()">
          <h1>Login</h1>
          <section>
             <label>Username</label>
@@ -28,6 +28,7 @@ import { AppCommonModule } from "../common/common.module";
 export class LoginPage {
    username = "";
    password = "";
+   isShaking = signal(false);
 
    constructor(
       private router: Router,
@@ -36,10 +37,13 @@ export class LoginPage {
    }
 
    async onLoginClick() {
+      this.isShaking.set(false);
       const success = await this.authService.login(this.username, this.password);
 
       if (success) {
          await this.router.navigate(["/"]);
+      } else {
+         this.isShaking.set(true);
       }
    }
 }

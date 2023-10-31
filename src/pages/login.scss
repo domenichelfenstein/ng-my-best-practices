@@ -1,6 +1,14 @@
 @import "../colors";
 @import "../components";
 
+@keyframes tilt-n-move-shaking {
+   0% { transform: translate(0, 0) rotate(0deg); }
+   25% { transform: translate(2px, 2px) rotate(2deg); }
+   50% { transform: translate(0, 0) rotate(0); }
+   75% { transform: translate(-2px, 2px) rotate(-2deg); }
+   100% { transform: translate(0, 0) rotate(0deg); }
+}
+
 :host {
    background: $background;
    flex: 1 1 auto;
@@ -14,6 +22,10 @@
       background: $background2;
       border-radius: 2rem;
       padding: 2rem;
+
+      &.shaking {
+         animation: tilt-n-move-shaking 0.25s 3;
+      }
 
       h1 {
          text-align: center;

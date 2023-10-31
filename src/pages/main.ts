@@ -43,8 +43,8 @@ import { Dropdown } from "../common/dropdown";
                <img src="../assets/icons/chevron-down.svg" alt="chevron-down"/>
             </a>
             <ul [dropdown-on]="toggler" class="right">
-               <li><a (click)="test()">Profile</a></li>
-               <li><a>Logout</a></li>
+               <li><a>Profile</a></li>
+               <li><a (click)="logout()">Logout</a></li>
             </ul>
          </section>
       </header>
@@ -91,7 +91,7 @@ export class MainPage {
       await this.router.navigate(["", "main", { outlets: { popup: path } }]);
    }
 
-   public test() {
-      console.log("test");
+   async logout() {
+      await this.authService.logout();
    }
 }

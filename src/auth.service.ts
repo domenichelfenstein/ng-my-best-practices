@@ -38,6 +38,12 @@ export class AuthService extends SignalService {
       await this.router.navigate(["login"]);
       return false;
    }
+
+   async logout() {
+      this.userInfo.set(undefined);
+      this.isLoggedIn.set(false);
+      await this.router.navigate(["login"]);
+   }
 }
 
 export type UserInfo = { userId: string; name: string; image: string };

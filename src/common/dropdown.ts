@@ -29,7 +29,7 @@ export class Dropdown implements AfterViewInit, OnDestroy {
       private renderer: Renderer2
    ) {
       this.documentUnlisten = renderer.listen(document, "click", (event: MouseEvent) => {
-         if (!this.isOpen) {
+         if (!this.isOpen || this.dropdownToggler?.contains(event.target as Node)) {
             return;
          }
 
