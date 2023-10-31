@@ -23,11 +23,15 @@ export class PatientInfoFromBackend {
    ) {
       const params = toSignal(activeRoute.params);
       effect(() => {
+         const paramsContent = params();
+         const patientId = paramsContent ? paramsContent["patientId"] : undefined;
+
          if (this.patientInfoWidget) {
             this.patientInfoWidget.patientInfo = patientService.getContentCurrentPatientId(params, patientService.getPatientInfo)();
          }
          if (this.patientProfileWidget) {
             this.patientProfileWidget.patientInfo = patientService.getContentCurrentPatientId(params, patientService.getPatientInfo)();
+            this.patientProfileWidget.patientId = patientId;
          }
          changeDetectorRef.markForCheck();
       })

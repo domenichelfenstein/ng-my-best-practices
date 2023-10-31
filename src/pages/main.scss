@@ -150,4 +150,31 @@
       grid-area: footer;
       background: $background;
    }
+
+   .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      z-index: 1;
+      background: rgba(0,0,0,.5);
+      justify-content: center;
+      align-items: center;
+
+      ::ng-deep {
+         router-outlet + * {
+            padding: 2rem;
+            background: white;
+            border-radius: .5rem;
+         }
+      }
+   }
+
+   &.active-popup {
+      .overlay {
+         display: flex;
+      }
+   }
 }
