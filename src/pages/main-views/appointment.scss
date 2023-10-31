@@ -21,38 +21,41 @@
       "information test-reports test-reports test-reports"
       "information prescriptions prescriptions prescriptions";
 
-      profile-widget {
-         grid-area: portrait;
-      }
+      ::ng-deep {
 
-      patient-info-widget {
-         grid-area: information;
-      }
+         profile-widget {
+            grid-area: portrait;
+         }
 
-      heart-rate-widget {
-         grid-area: heart-rate;
-      }
+         patient-info-widget {
+            grid-area: information;
+         }
 
-      body-temperature-widget {
-         grid-area: body-temperature;
-      }
+         heart-rate-widget {
+            grid-area: heart-rate;
+         }
 
-      glucose-widget {
-         grid-area: glucose;
-      }
+         body-temperature-widget {
+            grid-area: body-temperature;
+         }
 
-      test-reports-widget {
-         grid-area: test-reports;
-      }
+         glucose-widget {
+            grid-area: glucose;
+         }
 
-      prescriptions-widget {
-         grid-area: prescriptions;
-      }
+         test-reports-widget {
+            grid-area: test-reports;
+         }
 
-      > * {
-         padding: 2rem;
-         border-radius: 0.5rem;
-         background: $background2;
+         prescriptions-widget {
+            grid-area: prescriptions;
+         }
+
+         > * {
+            padding: 2rem;
+            border-radius: 0.5rem;
+            background: $background2;
+         }
       }
    }
 }
