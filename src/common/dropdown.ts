@@ -19,23 +19,35 @@ import {
 export class Dropdown implements AfterViewInit, OnDestroy {
    @Input("dropdown-on") dropdownToggler: HTMLElement | undefined;
    @HostBinding("class.open") isOpen = false;
-   private unlisten: () => void = () => {
+   private togglerUnlisten: () => void = () => {
+   };
+   private documentUnlisten: () => void = () => {
    };
 
    constructor(
       private changeDetector: ChangeDetectorRef,
       private renderer: Renderer2
    ) {
+      this.documentUnlisten = renderer.listen(document, "click", (event: MouseEvent) => {
+         if (!this.isOpen) {
+            return;
+         }
+
+         this.isOpen = false;
+         this.changeDetector.markForCheck();
+      });
    }
 
    ngAfterViewInit() {
-      this.unlisten = this.renderer.listen(this.dropdownToggler, "click", () => {
+      this.renderer.setStyle(this.dropdownToggler, "cursor", "pointer");
+      this.togglerUnlisten = this.renderer.listen(this.dropdownToggler, "click", () => {
          this.isOpen = !this.isOpen;
          this.changeDetector.markForCheck();
       });
    }
 
    ngOnDestroy() {
-      this.unlisten();
+      this.togglerUnlisten();
+      this.documentUnlisten();
    }
 }
