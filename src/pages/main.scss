@@ -159,7 +159,7 @@
       height: 100%;
       display: none;
       z-index: 10;
-      background: rgba(0,0,0,.5);
+      background: rgba(0, 0, 0, .5);
       justify-content: center;
       align-items: center;
 
@@ -182,19 +182,75 @@
       grid-template-columns: 100%;
       grid-template-rows: 4rem auto 2rem;
       grid-template-areas:
-      "header"
+      "nav"
       "main"
       "footer";
 
       nav {
-         display: none;
+         width: unset;
+         position: relative;
+
+         &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: .25rem;
+            width: 4rem;
+            height: 4rem;
+            background: url("../assets/icons/bars.svg") no-repeat center center;
+            background-size: 1.5rem;
+            @include recolor($theme5, 1);
+            cursor: pointer;
+         }
+
+         > a {
+            display: none;
+         }
+
+         &:hover {
+            width: unset;
+
+            > a {
+               display: none;
+            }
+         }
+
+         &.active {
+            height: 100vh;
+
+            > a {
+               display: flex;
+
+               img {
+                  margin-left: 1rem;
+               }
+            }
+         }
       }
 
       header {
-         padding: 1rem;
+         position: absolute;
+         top: 0;
+         right: 0;
+         height: 4rem;
+         width: 50%;
+         background: transparent;
+         padding: 0;
 
          .user-info {
-            margin-right: 0;
+            margin-right: 1.5rem;
+
+            > img {
+               border: 2px solid $theme5;
+            }
+
+            > a {
+               color: $theme5;
+
+               > img {
+                  @include recolor($theme5, 1);
+               }
+            }
          }
       }
    }

@@ -8,7 +8,7 @@ import { Dropdown } from "../common/dropdown";
    standalone: true,
    selector: "_main-page",
    template: `
-      <nav>
+      <nav [class.active]="navActive" (click)="navActive = !navActive">
          <div class="title"></div>
          <a [routerLink]="['appointment']" routerLinkActive="active">
             <img ngSrc="../assets/icons/stetoscope.svg" height="28" alt="stetoscrope" width="28"/>
@@ -69,6 +69,7 @@ import { Dropdown } from "../common/dropdown";
 })
 export class MainPage {
    @HostBinding("class.active-popup") isActivated = false;
+   navActive = false;
 
    constructor(
       public authService: AuthService,
