@@ -1,11 +1,7 @@
 :host {
    table {
-      width: 100%;
-
       tr {
          td {
-            padding: .5rem;
-
             &:first-child {
                font-weight: bold;
             }
