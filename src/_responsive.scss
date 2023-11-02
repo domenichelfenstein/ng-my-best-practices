@@ -1,0 +1,21 @@
+$phone-breakpoint: 767px;
+$tablet-breakpoint: 1024px;
+
+@mixin phone {
+  @media (max-width: $phone-breakpoint) {
+    @content;
+  }
+}
+
+@mixin maxTablet {
+   @media (max-width: $tablet-breakpoint) {
+      @content;
+   }
+}
+
+@mixin onlyTablet {
+  @media (min-width: $phone-breakpoint + 1) and (max-width: $tablet-breakpoint) {
+    @content;
+  }
+}
+

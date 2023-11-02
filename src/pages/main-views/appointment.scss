@@ -1,5 +1,6 @@
 @import "../../colors";
 @import "../../components";
+@import "../../responsive";
 
 :host {
    flex: 1 1 auto;
@@ -59,13 +60,27 @@
       }
    }
 
-   @media (max-width: 512px) {
+   @include maxTablet {
       padding: 0 .5rem;
       gap: .5rem;
 
       .dashboard {
          display: flex;
          flex-direction: column;
+      }
+   }
+
+   @include onlyTablet {
+      .dashboard {
+         display: grid;
+         grid-template-columns: repeat(6, 1fr);
+         grid-template-rows: unset;
+         grid-template-areas:
+      "portrait portrait portrait information information information"
+      "heart-rate heart-rate body-temperature body-temperature glucose glucose"
+      "test-reports test-reports test-reports test-reports test-reports test-reports"
+      "prescriptions prescriptions prescriptions prescriptions prescriptions prescriptions";
+
       }
    }
 }

@@ -1,4 +1,5 @@
 @import "../colors";
+@import "../responsive";
 
 :host {
    flex: 1 1 auto;
@@ -178,7 +179,7 @@
       }
    }
 
-   @media (max-width: 512px) {
+   @include maxTablet {
       grid-template-columns: 100%;
       grid-template-rows: 4rem auto 2rem;
       grid-template-areas:
