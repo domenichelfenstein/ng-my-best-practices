@@ -22,9 +22,6 @@ import { toSignal } from "@angular/core/rxjs-interop";
       PatientInfoWidget,
       ProfileWidget,
       PatientInfoFromBackend
-   ],
-   providers: [
-      PatientService
    ]
 })
 export class AppointmentView {

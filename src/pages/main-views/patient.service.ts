@@ -3,7 +3,7 @@ import { SignalService } from "../../common/signals.service";
 import { FetchService } from "../../common/fetch.service";
 import { Params } from "@angular/router";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class PatientService extends SignalService {
    constructor(
       fetchService: FetchService
