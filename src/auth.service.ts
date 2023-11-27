@@ -1,15 +1,13 @@
 import { Injectable, signal } from "@angular/core";
 import { Router } from "@angular/router";
 import { SignalService } from "./common/signals.service";
-import { FetchService } from "./common/fetch.service";
 
 @Injectable({ providedIn: "root" })
 export class AuthService extends SignalService {
    constructor(
-      private router: Router,
-      fetchService: FetchService
+      private router: Router
    ) {
-      super(fetchService);
+      super();
       this.isLoggedIn.set(true);
       this.login("test", "test");
    }

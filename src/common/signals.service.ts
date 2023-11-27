@@ -1,11 +1,8 @@
-import { Signal, signal } from "@angular/core";
+import { inject, Signal, signal } from "@angular/core";
 import { FetchService } from "./fetch.service";
 
 export abstract class SignalService {
-   protected constructor(
-      protected fetchService: FetchService
-   ) {
-   }
+   protected fetchService = inject(FetchService);
 
    private onUpdateNotifiers: (() => void)[] = [];
    public contentChanged() {
@@ -13,15 +10,37 @@ export abstract class SignalService {
    }
 
    private dictionary: { [url: string]: Signal<any> } = {};
-   protected getObject<T>(path: string) {
+   protected getObject<T>(path: string, debug = false) {
       if (!this.dictionary[path]) {
+         if(debug) {
+            console.log("getObject.noDictionaryItemFound", path);
+         }
+
          const fetchSignal = signal<T | undefined>(undefined);
-         const callback = () => this.fetchService.getObject<T>(path).then(fetchSignal.set);
+         const callback = async () => {
+            if(debug) {
+               console.log("getObject.callback");
+            }
+            const callbackResult = await this.fetchService.getObject<T>(path);
+            if(debug) {
+               console.log("getObject.callbackResult", callbackResult);
+            }
+            setTimeout(() =>{ // HACK to make sure the signal change is detected
+               fetchSignal.set(callbackResult);
+            })
+         };
          this.onUpdateNotifiers.push(callback);
          callback();
          this.dictionary[path] = fetchSignal;
+
+         if(debug) {
+            console.log("getObject.fetchSignalAdded", path);
+         }
       }
 
+      if(debug) {
+         console.log("getObject.beforeReturn");
+      }
       return <Signal<T>>this.dictionary[path];
    }
 

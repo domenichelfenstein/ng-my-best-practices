@@ -5,7 +5,7 @@ export class FetchService {
    private url = "/assets/fake-api.json";
 
    async post<TIn, TOut>(path: string, value: TIn) {
-      const response = await fetch(this.url, {
+      const response = await fetch(`${this.url}?${path}`, {
          method: 'GET',
          headers: this.getHeaders(),
       });
@@ -19,7 +19,7 @@ export class FetchService {
    }
 
    async getObject<T>(path: string) {
-      const response = await fetch(this.url, {
+      const response = await fetch(`${this.url}?${path}`, {
          method: 'GET',
          headers: this.getHeaders(),
       });

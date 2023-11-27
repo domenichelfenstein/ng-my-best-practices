@@ -1,16 +1,9 @@
 import { computed, Injectable, Signal } from "@angular/core";
 import { SignalService } from "../../common/signals.service";
-import { FetchService } from "../../common/fetch.service";
 import { Params } from "@angular/router";
 
 @Injectable({ providedIn: "root" })
 export class PatientService extends SignalService {
-   constructor(
-      fetchService: FetchService
-   ) {
-      super(fetchService);
-   }
-
    getPatientInfo = (id: string) => {
       return this.getObject<PatientInfo>(`information/${id}`);
    }
@@ -27,15 +20,31 @@ export class PatientService extends SignalService {
       return this.getObject<Prescription[]>(`prescriptions/${id}`);
    }
 
-   getContentCurrentPatientId = <T>(params: Signal<Params | undefined>, signalFunction: (id: string) => Signal<T>) => {
+   getContentCurrentPatientId = <T>(params: Signal<Params | undefined>, signalFunction: (id: string) => Signal<T>, debug = false) => {
       return computed(() => {
+         if(debug) {
+            console.log("getContentCurrentPatientId", params())
+         }
          const paramsContent = params();
          const patientId = paramsContent ? paramsContent["patientId"] : undefined;
+         if(debug) {
+            console.log("getContentCurrentPatientId.patientId", patientId)
+         }
          if (!patientId) {
             return null;
          }
 
-         return signalFunction(patientId)();
+         const signalFromOutside = signalFunction(patientId);
+         if(debug) {
+            console.log("getContentCurrentPatientId.signalFromOutside", signalFromOutside)
+         }
+         const fnResult = signalFromOutside();
+
+         if(debug) {
+            console.log("getContentCurrentPatientId.fnResult", fnResult)
+         }
+
+         return fnResult;
       });
    }
 }

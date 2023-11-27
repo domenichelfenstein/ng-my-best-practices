@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, effect, Input } from "@angular/core";
+import {
+   ChangeDetectionStrategy,
+   ChangeDetectorRef,
+   Component,
+   Directive,
+   effect,
+   Input
+} from "@angular/core";
 import { PatientService, TestReport } from "../patient.service";
 import { LocalDatePipe } from "../../../common/localDate.pipe";
 import { NgClass, NgForOf } from "@angular/common";
@@ -7,10 +14,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 
 @Directive({
    selector: "test-reports-widget[fromBackend]",
-   standalone: true,
-   providers: [
-      PatientService
-   ]
+   standalone: true
 })
 export class TestReportsFromBackend {
    constructor(
@@ -21,7 +25,8 @@ export class TestReportsFromBackend {
    ) {
       const params = toSignal(activeRoute.params);
       effect(() => {
-         host.reports = patientService.getContentCurrentPatientId(params, patientService.getTestReports)();
+         const testReports = patientService.getContentCurrentPatientId(params, patientService.getTestReports);
+         host.reports = testReports();
          changeDetectorRef.markForCheck();
       })
    }

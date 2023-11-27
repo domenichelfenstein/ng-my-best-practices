@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, ViewChild, ViewContainerRef } from "@angular/core";
+import { ChangeDetectionStrategy, Component, effect, Injector, ViewChild, ViewContainerRef } from "@angular/core";
 import { PatientService } from "./patient.service";
 import { ProfileWidget } from "./appointment-widgets/profile";
 import { PatientInfoWidget } from "./appointment-widgets/patient-info";
@@ -30,24 +30,28 @@ export class AppointmentView {
    constructor(
       patientService: PatientService,
       activatedRoute: ActivatedRoute,
+      injector: Injector
    ) {
       const params = toSignal(activatedRoute.params);
 
       setTimeout(() => {
          import("./appointment-widgets/heart-rate").then(x => {
             const widget = this.dashboard.createComponent(x.HeartRateWidget);
-            effect(() => widget.setInput("vital-signs", patientService.getContentCurrentPatientId(params, patientService.getVitalSigns)()), { injector: widget.injector });
+            const vitalSignsSignal = patientService.getContentCurrentPatientId(params, patientService.getVitalSigns);
+            effect(() => widget.setInput("vital-signs", vitalSignsSignal()), { injector });
          });
          import("./appointment-widgets/body-temperature").then(x => {
             const widget = this.dashboard.createComponent(x.BodyTemperatureWidget);
-            effect(() => widget.setInput("vital-signs", patientService.getContentCurrentPatientId(params, patientService.getVitalSigns)()), { injector: widget.injector });
+            const vitalSignsSignal = patientService.getContentCurrentPatientId(params, patientService.getVitalSigns);
+            effect(() => widget.setInput("vital-signs", vitalSignsSignal()), { injector });
          });
          import("./appointment-widgets/glucose").then(x => {
             const widget = this.dashboard.createComponent(x.GlucoseWidget);
-            effect(() => widget.setInput("vital-signs", patientService.getContentCurrentPatientId(params, patientService.getVitalSigns)()), { injector: widget.injector });
+            const vitalSignsSignal = patientService.getContentCurrentPatientId(params, patientService.getVitalSigns);
+            effect(() => widget.setInput("vital-signs", vitalSignsSignal()), { injector });
          });
 
-         import("./appointment-widgets/test-reports").then(x => this.dashboard.createComponent(x.TestReportsWidget))
+         import("./appointment-widgets/test-reports").then(x => this.dashboard.createComponent(x.TestReportsWidget));
          import("./appointment-widgets/prescriptions").then(x => this.dashboard.createComponent(x.PrescriptionsWidget))
       }, 1000);
    }

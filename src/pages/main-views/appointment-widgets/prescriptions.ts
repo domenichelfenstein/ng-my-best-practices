@@ -31,10 +31,7 @@ class DurationPipe implements PipeTransform {
 
 @Directive({
    selector: "prescriptions-widget[fromBackend]",
-   standalone: true,
-   providers: [
-      PatientService
-   ]
+   standalone: true
 })
 export class PrescriptionsFromBackend {
    constructor(

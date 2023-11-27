@@ -7,10 +7,7 @@ import { ProfileWidget } from "./profile";
 
 @Directive({
    selector: "[fromBackend]",
-   standalone: true,
-   providers: [
-      PatientService
-   ]
+   standalone: true
 })
 export class PatientInfoFromBackend {
    patientInfoWidget = inject(PatientInfoWidget, { optional: true });
