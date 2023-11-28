@@ -10,7 +10,7 @@ import {
 } from "@angular/core";
 import { PatientService, Prescription } from "../patient.service";
 import { LocalDatePipe } from "../../../common/localDate.pipe";
-import { NgClass, NgForOf } from "@angular/common";
+import { NgClass } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -66,25 +66,26 @@ export class PrescriptionsFromBackend {
          </tr>
          </thead>
          <tbody>
-         <tr *ngFor="let p of prescriptions">
-            <td>
-               <div class="icon-wrapper" [ngClass]="p.type">
-                  <img src="../../../assets/icons/notes-medical.svg" alt="{{ p.type }}"/>
-               </div>
-               <span>{{ p.label }}</span>
-            </td>
-            <td>{{ p.date | localDate }}</td>
-            <td>{{ [p.durationAmount, p.durationUnit] | duration }}</td>
-         </tr>
+         @for (p of prescriptions; track p) {
+            <tr>
+               <td>
+                  <div class="icon-wrapper" [ngClass]="p.type">
+                     <img src="../../../assets/icons/notes-medical.svg" alt="{{ p.type }}"/>
+                  </div>
+                  <span>{{ p.label }}</span>
+               </td>
+               <td>{{ p.date | localDate }}</td>
+               <td>{{ [p.durationAmount, p.durationUnit] | duration }}</td>
+            </tr>
+         }
          </tbody>
       </table>`,
    styleUrls: ["./prescriptions.scss"],
    imports: [
-      LocalDatePipe,
-      NgForOf,
-      NgClass,
-      DurationPipe
-   ],
+    LocalDatePipe,
+    NgClass,
+    DurationPipe
+],
    changeDetection: ChangeDetectionStrategy.OnPush,
    hostDirectives: [
       PrescriptionsFromBackend]

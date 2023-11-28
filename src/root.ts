@@ -12,8 +12,8 @@ import { loginRoute } from "./pages/login.route";
    `,
    styleUrls: ['./root.scss'],
    imports: [
-      RouterOutlet
-   ],
+    RouterOutlet
+],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 class AppRoot {

@@ -5,6 +5,7 @@
          {
             "userId": "f17cad63-69c6-455a-81e2-ba052a1ea40e",
             "name": "Dr. Alex Hess",
+            "widgets": [ "test-report", "prescription" ],
             "image": "https://cdn.discordapp.com/attachments/1126227639049396365/1168531862633861120/dome_h_portrait_of_male__face_zoom_in__doctor__tanned__smiling__982ff6df-f25d-442b-8996-80d80a3871c8.png?ex=65521b1a&is=653fa61a&hm=a78f6c1744d2423974e575d540225c54f370b5cec4ff7588eba041f15cc32226&"
          }
       ],

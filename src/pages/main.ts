@@ -8,63 +8,63 @@ import { Dropdown } from "../common/dropdown";
    standalone: true,
    selector: "_main-page",
    template: `
-      <nav [class.active]="navActive" (click)="navActive = !navActive">
-         <div class="title"></div>
-         <a [routerLink]="['appointment']" routerLinkActive="active">
-            <img ngSrc="../assets/icons/stetoscope.svg" height="28" alt="stetoscrope" width="28"/>
-            <span>Appointment</span>
-         </a>
-         <a [routerLink]="['users']" routerLinkActive="active">
-            <img ngSrc="../assets/icons/users.svg" height="28" alt="users" width="35" priority=""/>
-            <span>Users</span>
-         </a>
-         <a [routerLink]="['health']" routerLinkActive="active">
-            <img ngSrc="../assets/icons/heart-beat.svg" height="28" alt="heart" width="28"/>
-            <span>Health</span>
-         </a>
-         <a [routerLink]="['docs']" routerLinkActive="active">
-            <img ngSrc="../assets/icons/document-text.svg" height="28" alt="docs" width="21"/>
-            <span>Documents</span>
-         </a>
-         <a [routerLink]="['calendar']" routerLinkActive="active">
-            <img ngSrc="../assets/icons/calendar.svg" height="28" alt="calendar" width="25"/>
-            <span>Calendar</span>
-         </a>
-         <a [routerLink]="['archive']" routerLinkActive="active">
-            <img ngSrc="../assets/icons/folder.svg" height="28" alt="folder" width="28"/>
-            <span>Archive</span>
-         </a>
-      </nav>
-      <header>
-         <section class="user-info">
-            <img [src]="authService.userInfo()?.image" [alt]="authService.userInfo()?.name"/>
-            <a #toggler>
-               <span>{{ authService.userInfo()?.name }}</span>
-               <img src="../assets/icons/chevron-down.svg" alt="chevron-down"/>
-            </a>
-            <ul [dropdown-on]="toggler" class="right">
-               <li><a>Profile</a></li>
-               <li><a (click)="logout()">Logout</a></li>
-            </ul>
-         </section>
-      </header>
-      <main>
-         <router-outlet></router-outlet>
-      </main>
-      <footer></footer>
-      <div class="overlay" (click)="onOverlayClick($event, overlay)" #overlay>
-         <router-outlet name="popup"
-                        (activate)="isActivated = true" (deactivate)="isActivated = false">
-         </router-outlet>
-      </div>`,
+       <nav [class.active]="navActive" (click)="navActive = !navActive">
+           <div class="title"></div>
+           <a [routerLink]="['appointment']" routerLinkActive="active">
+               <img ngSrc="../assets/icons/stetoscope.svg" height="28" alt="stetoscrope" width="28"/>
+               <span>Appointment</span>
+           </a>
+           <a [routerLink]="['users']" routerLinkActive="active">
+               <img ngSrc="../assets/icons/users.svg" height="28" alt="users" width="35" priority=""/>
+               <span>Users</span>
+           </a>
+           <a [routerLink]="['health']" routerLinkActive="active">
+               <img ngSrc="../assets/icons/heart-beat.svg" height="28" alt="heart" width="28"/>
+               <span>Health</span>
+           </a>
+           <a [routerLink]="['docs']" routerLinkActive="active">
+               <img ngSrc="../assets/icons/document-text.svg" height="28" alt="docs" width="21"/>
+               <span>Documents</span>
+           </a>
+           <a [routerLink]="['calendar']" routerLinkActive="active">
+               <img ngSrc="../assets/icons/calendar.svg" height="28" alt="calendar" width="25"/>
+               <span>Calendar</span>
+           </a>
+           <a [routerLink]="['archive']" routerLinkActive="active">
+               <img ngSrc="../assets/icons/folder.svg" height="28" alt="folder" width="28"/>
+               <span>Archive</span>
+           </a>
+       </nav>
+       <header>
+           <section class="user-info">
+               <img [src]="authService.userInfo()?.image" [alt]="authService.userInfo()?.name"/>
+               <a #toggler>
+                   <span>{{ authService.userInfo()?.name }}</span>
+                   <img src="../assets/icons/chevron-down.svg" alt="chevron-down"/>
+               </a>
+               <ul [dropdown-on]="toggler" class="right">
+                   <li><a>Profile</a></li>
+                   <li><a (click)="logout()">Logout</a></li>
+               </ul>
+           </section>
+       </header>
+       <main>
+           <router-outlet></router-outlet>
+       </main>
+       <footer></footer>
+       <div class="overlay" (click)="onOverlayClick($event, overlay)" #overlay>
+           <router-outlet name="popup"
+                          (activate)="isActivated = true" (deactivate)="isActivated = false">
+           </router-outlet>
+       </div>`,
    styleUrls: ["./main.scss"],
    imports: [
-      RouterOutlet,
-      RouterLink,
-      RouterLinkActive,
-      NgOptimizedImage,
-      Dropdown
-   ],
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    NgOptimizedImage,
+    Dropdown
+],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainPage {
