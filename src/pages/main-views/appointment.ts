@@ -5,7 +5,6 @@ import {
    computed,
    effect,
    Injector,
-   signal,
    Signal,
    ViewChild,
    ViewContainerRef
@@ -29,13 +28,25 @@ import { AuthService } from "../../auth.service";
            <profile-widget fromBackend></profile-widget>
            <patient-info-widget fromBackend></patient-info-widget>
            <ng-container #placeholder></ng-container>
-           @defer (when hasTestReport()) {
-               <test-reports-widget></test-reports-widget>
+           @for (widget of widgets();track $index) {
+               @switch (widget) {
+                   @case ("test-report") {
+                       @defer (on viewport) {
+                           <test-reports-widget></test-reports-widget>
+                       } @placeholder {
+                           <div class="viewportTrigger"></div>
+                       }
+                   }
+                   @case ("prescription") {
+                       @defer (on viewport) {
+                           <prescriptions-widget></prescriptions-widget>
+                       } @placeholder {
+                           <div class="viewportTrigger"></div>
+                       }
+                   }
+               }
+               <ng-container #placeholder></ng-container>
            }
-           @defer (when hasPrescription()) {
-               <prescriptions-widget></prescriptions-widget>
-           }
-           <div class="viewportTrigger" #t></div>
        </div>`,
    styleUrls: ['./appointment.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,13 +60,12 @@ import { AuthService } from "../../auth.service";
 })
 export class AppointmentView implements AfterViewInit {
    @ViewChild("placeholder", { read: ViewContainerRef }) dashboard!: ViewContainerRef;
-   @ViewChild("t", { read: ViewContainerRef }) viewportTrigger!: ViewContainerRef;
 
-   hasTestReport: Signal<boolean>;
-   hasPrescription: Signal<boolean>;
+   widgets: Signal<string[]>;
 
-   // I did not use `@defer(on viewport(t))` because I needed it to work with `when` and `on` together -> so I created a custom signal
-   triggerReached = signal(false);
+   // @ViewChild("t", { read: ViewContainerRef }) viewportTrigger!: ViewContainerRef;
+   // // can be used instead of `@defer(on viewport(t))`
+   // triggerReached = signal(false);
 
    constructor(
       patientService: PatientService,
@@ -84,30 +94,26 @@ export class AppointmentView implements AfterViewInit {
          });
       }, 1000);
 
-      const hasWidget = (widgetName: string) => computed(() => {
+      this.widgets = computed(() => {
          const userInfo = authService.userInfo();
-         const $triggerReached = this.triggerReached();
-         if (userInfo == undefined || !$triggerReached) {
-            return false;
+         if (userInfo == undefined) {
+            return [];
          }
 
-         return userInfo.widgets.includes(widgetName);
+         return userInfo.widgets;
       });
-
-      this.hasTestReport = hasWidget("test-report");
-      this.hasPrescription = hasWidget("prescription");
    }
 
    ngAfterViewInit(): void {
-      const observer = new IntersectionObserver(
-         entries => {
-            if (entries[0].isIntersecting) {
-               this.triggerReached.set(true);
-            }
-         }, {
-            root: null,
-            threshold: 1.0
-         });
-      observer.observe(this.viewportTrigger.element.nativeElement);
+      // const observer = new IntersectionObserver(
+      //    entries => {
+      //       if (entries[0].isIntersecting) {
+      //          this.triggerReached.set(true);
+      //       }
+      //    }, {
+      //       root: null,
+      //       threshold: 1.0
+      //    });
+      // observer.observe(this.viewportTrigger.element.nativeElement);
    }
 }
