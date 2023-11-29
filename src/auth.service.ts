@@ -44,4 +44,5 @@ export class AuthService extends SignalService {
    }
 }
 
-export type UserInfo = { userId: string; name: string; image: string; widgets: string[] };
+export type WidgetDescription = { type: string; size: string };
+export type UserInfo = { userId: string; name: string; image: string; widgets: WidgetDescription[] };

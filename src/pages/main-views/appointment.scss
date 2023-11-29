@@ -14,83 +14,75 @@
       display: grid;
       gap: 2rem;
 
-      grid-template-columns: 1.25fr 1fr 1fr 1fr;
-      grid-template-rows: 1.5fr 1fr .25fr 2.5fr;
+      grid-template-columns: 1fr 3fr;
+      grid-template-rows: 1fr 2fr;
       grid-template-areas:
-      "portrait heart-rate body-temperature glucose"
-      "portrait test-reports test-reports test-reports"
-      "information test-reports test-reports test-reports"
-      "information prescriptions prescriptions prescriptions";
+      "portrait custom"
+      "information custom";
 
-      ::ng-deep {
-         profile-widget {
-            grid-area: portrait;
-            min-height: 350px; // because of viewport deference
+      .widget {
+         padding: 2rem;
+         border-radius: 0.5rem;
+         background: $background2;
+         overflow: hidden;
+
+         h3 {
+            margin-bottom: 1rem;
          }
+      }
 
-         patient-info-widget {
-            grid-area: information;
-            min-height: 350px; // because of viewport deference
-         }
+      .placeholder {
+         height: 200px;
+      }
 
-         heart-rate-widget {
-            grid-area: heart-rate;
-         }
+      profile-widget {
+         grid-area: portrait;
+      }
 
-         body-temperature-widget {
-            grid-area: body-temperature;
-         }
+      patient-info-widget {
+         grid-area: information;
+      }
 
-         glucose-widget {
-            grid-area: glucose;
-         }
+      .custom {
+         grid-area: custom;
+         display: flex;
+         flex-flow: row wrap;
+         margin-top: -1rem;
 
-         test-reports-widget {
-            grid-area: test-reports;
-         }
+         .widget {
+            margin: 1rem;
 
-         prescriptions-widget {
-            grid-area: prescriptions;
-         }
-
-         > *:not(.viewportTrigger) {
-            padding: 2rem;
-            border-radius: 0.5rem;
-            background: $background2;
-            overflow: hidden;
-
-            h3 {
-               margin-bottom: 1rem;
+            &.wide {
+               flex: 1 1 calc(100% - 6rem); // 100% - 2*padding - 2*margin
             }
-         }
-
-         .viewportTrigger {
-            height: 200px;
+            &.small {
+               flex: 0 1 calc(33.3% - 6rem);
+            }
          }
       }
    }
 
    @include maxTablet {
-      padding: 0 .5rem;
-      gap: .5rem;
+      padding: 0;
 
       .dashboard {
+         gap: 1rem;
          display: flex;
          flex-direction: column;
-      }
-   }
 
-   @include onlyTablet {
-      .dashboard {
-         display: grid;
-         grid-template-columns: repeat(6, 1fr);
-         grid-template-rows: unset;
-         grid-template-areas:
-      "portrait portrait portrait information information information"
-      "heart-rate heart-rate body-temperature body-temperature glucose glucose"
-      "test-reports test-reports test-reports test-reports test-reports test-reports"
-      "prescriptions prescriptions prescriptions prescriptions prescriptions prescriptions";
+         .custom {
+            flex-direction: column;
+            margin: 0;
+            gap: 1rem;
 
+            .widget {
+               margin: 0;
+
+               &.wide, &.small {
+                  flex: 1 1 auto;
+               }
+            }
+         }
       }
    }
 }
