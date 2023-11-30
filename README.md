@@ -1,5 +1,8 @@
 # My Personal Best Practices for Angular (as of 2023)
 
+# Demo
+[Click here!](https://domenichelfenstein.github.io/ng-my-best-practices)
+
 ## What is included?
 - [x] All standalone
 - [x] All with control flow
@@ -12,6 +15,7 @@
 - [x] SVG icon colorization per SASS
 - [x] Self-collapsing sidebar with expansion animation
 - [x] Dashboard with configurable widgets (manually per fake API)
+- [x] Deployed as GitHub pages
 - [x] NO FLUFF!
 
 ## Development server
