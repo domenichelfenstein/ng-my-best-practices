@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ng-dez-2023",
+            "outputPath": "docs",
             "index": "src/index.html",
             "main": "src/root.ts",
             "polyfills": [
