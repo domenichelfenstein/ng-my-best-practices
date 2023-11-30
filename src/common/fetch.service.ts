@@ -6,6 +6,7 @@ export class FetchService {
    constructor(
       @Inject(APP_BASE_HREF) baseHref: string
    ) {
+      console.log("baseRef", baseHref);
       this.url = `${baseHref}assets/fake-api.json`;
    }
 
