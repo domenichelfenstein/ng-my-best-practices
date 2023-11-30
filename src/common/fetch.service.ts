@@ -7,7 +7,7 @@ export class FetchService {
       @Inject(APP_BASE_HREF) baseHref: string
    ) {
       console.log("baseRef", baseHref);
-      this.url = `${baseHref}assets/fake-api.json`;
+      this.url = `${baseHref}/assets/fake-api.json`;
    }
 
    private url: string;

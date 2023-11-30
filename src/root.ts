@@ -7,7 +7,7 @@ import { APP_BASE_HREF, PlatformLocation } from "@angular/common";
 
 function trimLastSlashFromUrl(baseUrl: string) {
    if (baseUrl == undefined || baseUrl === "") {
-      return "/";
+      return "";
    } else if (baseUrl[baseUrl.length - 1] == '/') {
       var trimmedUrl = baseUrl.substring(0, baseUrl.length - 1);
       return trimmedUrl;
