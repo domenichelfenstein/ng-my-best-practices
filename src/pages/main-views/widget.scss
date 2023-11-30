@@ -1,0 +1,65 @@
+
+@import "../../components";
+@import "../../colors";
+
+:host {
+   position: relative;
+
+   &.wide {
+      .expand {
+         display: none;
+      }
+   }
+
+   &.small {
+      .shrink {
+         display: none;
+      }
+   }
+
+   &:first-child {
+      .toLeft {
+         display: none;
+      }
+   }
+
+   &:last-child {
+      .toRight {
+         display: none;
+      }
+   }
+}
+
+.content {
+   ::ng-deep > * {
+      display: block;
+   }
+}
+
+.actions {
+   position: absolute;
+   right: .5rem;
+   top: 0.5rem;
+   opacity: 0;
+
+   transition: opacity 0.2s ease-in-out;
+
+   button {
+      padding: 0 .25rem;
+      margin: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+
+      img {
+         width: 1.2rem;
+         height: 1.2rem;
+
+         @include recolor($text2, 1);
+      }
+   }
+}
+
+:host(:hover) .actions {
+   opacity: 1;
+}

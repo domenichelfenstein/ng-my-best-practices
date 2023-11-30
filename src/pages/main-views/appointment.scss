@@ -20,7 +20,7 @@
       "portrait custom"
       "information custom";
 
-      .widget {
+      widget {
          padding: 2rem;
          border-radius: 0.5rem;
          background: $background2;
@@ -49,12 +49,13 @@
          flex-flow: row wrap;
          margin-top: -1rem;
 
-         .widget {
+         widget {
             margin: 1rem;
 
             &.wide {
                flex: 1 1 calc(100% - 6rem); // 100% - 2*padding - 2*margin
             }
+
             &.small {
                flex: 0 1 calc(33.3% - 6rem);
             }
@@ -75,7 +76,7 @@
             margin: 0;
             gap: 1rem;
 
-            .widget {
+            widget {
                margin: 0;
 
                &.wide, &.small {
