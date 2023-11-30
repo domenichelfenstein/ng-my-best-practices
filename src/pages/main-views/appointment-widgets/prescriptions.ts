@@ -54,7 +54,7 @@ export class PrescriptionsFromBackend {
    template: `
       <h3>Prescriptions</h3>
       <a class="drop-zone">
-         <img src="../../../assets/icons/plus.svg" alt="plus"/>
+         <img src="./assets/icons/plus.svg" alt="plus"/>
          <label>Add a prescription</label>
       </a>
       <table>
@@ -70,7 +70,7 @@ export class PrescriptionsFromBackend {
             <tr>
                <td>
                   <div class="icon-wrapper" [ngClass]="p.type">
-                     <img src="../../../assets/icons/notes-medical.svg" alt="{{ p.type }}"/>
+                     <img src="./assets/icons/notes-medical.svg" alt="{{ p.type }}"/>
                   </div>
                   <span>{{ p.label }}</span>
                </td>

@@ -5,7 +5,7 @@ import { VitalSigns } from "../patient.service";
    standalone: true,
    selector: "body-temperature-widget",
    template: `
-      <img src="../../../assets/icons/thermometer.svg" alt="thermometer"/>
+      <img src="./assets/icons/thermometer.svg" alt="thermometer"/>
       <h3>Body Temperature</h3>
       <div>
          <var>{{ vitalSigns?.bodyTemperature }}</var>

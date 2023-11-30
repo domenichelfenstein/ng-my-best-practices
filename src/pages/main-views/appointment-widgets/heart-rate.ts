@@ -5,7 +5,7 @@ import { VitalSigns } from "../patient.service";
    standalone: true,
    selector: "heart-rate-widget",
    template: `
-      <img src="../../../assets/icons/heart-rate.svg" alt="heart rate"/>
+      <img src="./assets/icons/heart-rate.svg" alt="heart rate"/>
       <h3>Heart Rate</h3>
       <div>
          <var>{{ vitalSigns?.heartRate }}</var>

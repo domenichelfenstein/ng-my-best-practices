@@ -5,7 +5,7 @@ import { VitalSigns } from "../patient.service";
    standalone: true,
    selector: "glucose-widget",
    template: `
-      <img src="../../../assets/icons/vial.svg" alt="vial"/>
+      <img src="./assets/icons/vial.svg" alt="vial"/>
       <h3>Glucose</h3>
       <div>
          <var>{{ vitalSigns?.glucoseLevel }}</var>

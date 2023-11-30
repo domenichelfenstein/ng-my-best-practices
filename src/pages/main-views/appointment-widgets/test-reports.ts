@@ -36,7 +36,7 @@ export class TestReportsFromBackend {
                       <h4>{{ t.label }}</h4>
                <small>{{ t.date | localDate }}</small>
                <div class="icon-wrapper" [ngClass]="t.resultType">
-                  <img src="../../../assets/icons/notes-medical.svg" alt="{{ t.resultType }}"/>
+                  <img src="./assets/icons/notes-medical.svg" alt="{{ t.resultType }}"/>
                </div>
             </li>
          }
