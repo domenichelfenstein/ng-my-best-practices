@@ -1,8 +1,15 @@
-import { Injectable } from "@angular/core";
+import { APP_BASE_HREF } from "@angular/common";
+import { Inject, Injectable } from "@angular/core";
 
 @Injectable({ providedIn: 'root' })
 export class FetchService {
-   private url = "/assets/fake-api.json";
+   constructor(
+      @Inject(APP_BASE_HREF) baseHref: string
+   ) {
+      this.url = `${baseHref}assets/fake-api.json`;
+   }
+
+   private url: string;
 
    async post<TIn, TOut>(path: string, value: TIn) {
       const response = await fetch(`${this.url}?${path}`, {
