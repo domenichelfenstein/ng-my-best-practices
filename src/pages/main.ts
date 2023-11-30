@@ -40,7 +40,7 @@ import { Dropdown } from "../common/dropdown";
                <img [src]="authService.userInfo()?.image" [alt]="authService.userInfo()?.name"/>
                <a #toggler>
                    <span>{{ authService.userInfo()?.name }}</span>
-                   <img src="../assets/icons/chevron-down.svg" alt="chevron-down"/>
+                   <img src="./assets/icons/chevron-down.svg" alt="chevron-down"/>
                </a>
                <ul [dropdown-on]="toggler" class="right">
                    <li><a>Profile</a></li>
